@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}Products | Shoppy{% endblock title %}
+    
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% include 'search/snippets/search-form.html' %}
+            {% for o in object_list %}
+                <div class="col" >
+                    <a href="{% url 'products:detail' slug=o.slug %}">
+                        <div class="card product-card">
+                            <div class="card-image">
+                                <img src="{{o.image.url}}">
+                                <a class="btn-floating halfway-fab waves-effect waves-light red add-remove-shortcut-btn" data-csrf="{% csrf_token %}" data-product-id="{{o.id}}" data-action="{% url 'carts:update' %}" data-method="POST" ><i class="material-icons add-remove-icon">{% if o not in cart.products.all %} add{% else %} remove {% endif %}</i></a>
+                            </div>
+                            <div class="card-content">
+                                <a class="card-title" href="{% url 'products:detail' slug=o.slug %}">{{o.title}}</a>
+                                <p>{{o.description|truncatechars:25}}</p>
+                                <!-- {% csrf_token %} -->
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}  
+        </div>
+    </div>
+{% endblock content %}
+
+
+{% block script %}
+{% endblock script %}
+    
+    

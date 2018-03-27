@@ -1,0 +1,46 @@
+<form action="{{action_url}}" method="POST" class="center" >
+    {% csrf_token %}
+        <div class="row">
+            <h3>Address</h3>
+            <div class="col m8 s10 offset-s1">
+                
+                {% if next_url %}
+                    <input type="hidden" name="next" value="{{next_url}}">
+                {% endif %}
+                    
+                
+                
+                {% if address_type %}
+                    <input type="hidden" name="address_type" value="{{address_type}}">  
+                {% endif %}
+                <br>
+                <div class="input-field col s12">
+                        {{form.address_line_1}}
+                        {{form.address_line_1.label_tag}}
+                </div>
+                <div class="input-field col s12">
+                    {{form.address_line_2}}
+                    {{form.address_line_2.label_tag}}
+                </div>
+                <div class="input-field col s12">
+                    {{form.city}}
+                    {{form.city.label_tag}}
+                </div>
+                <div class="input-field col s12">
+                    {{form.state}}
+                    {{form.state.label_tag}}
+                </div>
+                <div class="input-field col s12">
+                    {{form.country}}
+                    {{form.country.label_tag}}
+                </div>
+                <div class="input-field col s12">
+                    {{form.zip_code}}
+                    {{form.zip_code.label_tag}}
+                </div>
+                <input type="submit" value="{{btn_value}}" class="btn black white-text col m4 s4 right">
+            </div>
+            
+            
+        </div>
+    </form>

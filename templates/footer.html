@@ -1,0 +1,36 @@
+<footer class="page-footer purple darken-4 white-text">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>   
+                    {% if user.is_authenticated %}
+                        <li><a class="grey-text text-lighten-3" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{% url 'products:index' %}">Products</a></li>                            
+                        <li>
+                            <form action="{% url 'accounts:logout' %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-flat grey-text">Logout</button>
+                            </form>
+                        </li>        
+                    {% else %}
+                        <li><a class="grey-text text-lighten-3" href="{% url 'home' %}">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{% url 'accounts:login' %}">Login</a></li>
+                        <li><a class="grey-text text-lighten-3" href="{% url 'accounts:signup' %}">Signup</a></li>
+                
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright purple darken-2">
+        <div class="container">
+            Shoppy &copy; 2018 Copyright
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}Home | Shoppy{% endblock title %}
+    
+{% block content %}
+    {% include 'slider.html' %}
+    <div class="container">
+        <section id="featured">
+            <h4>Featured</h4>
+            <div class="row">
+                
+                {% for f in featured_products %}
+                    <div class="col" >
+                        <div class="card product-card">
+                            <div class="card-image">
+                                <img src="{{f.image.url}}">
+                                
+                                <a class="btn-floating halfway-fab waves-effect waves-light red add-remove-shortcut-btn" data-csrf="{% csrf_token %}" data-product-id="{{f.id}}" data-action="{% url 'carts:update' %}" data-method="POST"><i class="material-icons add-remove-icon">{% if f not in cart.products.all %} add {% else %} remove {% endif %}</i></a>
+                            </div>
+                            <div class="card-content">
+                                <a class="card-title" href="{% url 'products:detail' slug=f.slug %}">{{f.title}}</a>
+                                <p>{{f.description|truncatechars:25}}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- {% include 'products/snippets/products-list.html' %} -->
+            </div> 
+        </section>
+    </div>
+
+{% endblock content %}

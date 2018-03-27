@@ -1,0 +1,21 @@
+<form action="{{action_url}}" method="POST" style="padding:2rem;">
+    {% csrf_token %}
+    {% if next_url %}
+        <input type="hidden" name="next" value="{{next_url}}">
+    {% endif %}
+    {% if address_type %}
+        <input type="hidden" name="address_type" value="{{address_type}}">  
+    {% endif %}
+    <div class="input-field">
+        <select name="shipping_address">
+            <option value="" disabled selected>Choose your Address</option>
+            
+            {% for a in address_qs %}
+                <option value="{{a.id}}">{{a.address_line_1}}, {{a.address_line_2}}</option>
+            {% endfor %}
+
+        </select>
+        <label>Select Address</label>
+        <input type="submit" value="Use Address" class="btn black waves-effect">    
+    </div>
+</form>

@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+
+{% block title %}Products | Shoppy{% endblock title %}
+    
+
+{% block content %}
+    <div class="container" style="margin-top:3rem;">
+        <div class="row">
+            {% include "search/snippets/search-form.html" %}
+        </div>
+        <div class="row">
+            {% for o in object_list %}
+                <div class="col" >
+                    <div class="card product-card">
+                        <div class="card-image">
+                            <img src="{{o.image.url}}">
+                            
+                            <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                        </div>
+                        <div class="card-content">
+                            <a class="card-title" href="{% url 'products:detail' slug=o.slug %}">{{o.title}}</a>
+                            <p>{{o.description|truncatechars:25}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}  
+        </div>
+    </div>
+{% endblock content %}
+    

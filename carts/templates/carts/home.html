@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+
+{% block title %}Cart | Shoppy{% endblock title %}
+    
+
+{% block content %}
+    <div class="container">
+        <h1>Hello Carts!</h1>
+        
+        {% if cart_obj.products.exists %} 
+            <table class="striped cart-table">
+                <thead>
+                    <tr>
+                        <th>Products</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+        
+                <tbody class="cart-table-body">
+                        {% for p in cart_obj.products.all %}    
+                            <tr class="cart-product">
+                                <td>{{p.title}}</td>
+                                <td>hmmmm</td>
+                                <td>{{p.price}}</td>
+                                <td>{% include 'products/snippets/remove-product.html' with product_id=p.id %}</td>
+                            </tr>
+                        {% endfor %}
+                </tbody>
+            </table>
+            <div class="right">
+                <p>subtotal: <span class="cart-subtotal">{{cart_obj.subtotal}}</span></p>
+                <p>total: <span class="cart-total">{{cart_obj.total}}</span></p>  
+                <a class="btn green" href="{% url  'carts:checkout' %}">Checkout?</a>          
+            </div>
+
+            
+        {% else %}
+            <p>No Products in cart</p>
+        {% endif %}
+
+        <div class="hidden-remove-form" style="display:none;">
+            {% include 'products/snippets/remove-product.html' %}
+        </div>
+        
+    </div>  
+    
+{% endblock content %}

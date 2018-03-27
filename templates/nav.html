@@ -1,0 +1,79 @@
+    <header>
+        <div class="navbar-fixed">
+            <nav class="purple darken-4">
+                <div class="nav-wrapper">
+                    
+                    <a href="{% url 'home' %}" class="brand-logo tooltipped" style="font-family: 'Sacramento', cursive;" data-position="right" data-delay="50" data-tooltip="Bloggy">Shoppy&trade;</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li>
+                                <a href="{% url 'home' %}" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Home">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'products:index' %}" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Products">Products</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'carts:home' %}" class="btn-flat tooltipped white-text prefix" style="display: -webkit-inline-box;" data-position="bottom" data-delay="50" data-tooltip="Cart"><span class="cart-item-count">{{request.session.cart_items}}</span><i class="material-icons">shopping_cart</i></a>
+                            </li>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'accounts:index' %}" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Accounts" >Accounts</a>
+                            </li>
+                            <li>
+                                <form action="{% url 'accounts:logout' %}" method="POST" style="padding:0 2rem 0 0;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Logout">Logout</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login' %}" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Login">Login</a></li>
+                            <li><a href="{% url 'accounts:signup' %}" class="btn-flat tooltipped white-text" data-position="bottom" data-delay="50" data-tooltip="Signup">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                    <ul id="slide-out" class="side-nav">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <div class="user-view">
+                                <div class="background" style="background-color:deeppink;"></div>
+                                <a href="#!brand" style="font-family: 'Sacramento', cursive;font-size:2.7rem;">Shoppy&trade;</a>
+                                <a href="{% url 'accounts:profile' %}"><span class="name">{{user.first_name}}</span></a>
+                                <a href="{% url 'accounts:profile' %}"><span class="email">{{user.email}}</span></a>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li>
+                                <div class="user-view">
+                                <div class="background" style="background-color:deeppink;"></div>
+                                <a href="#!brand" style="font-family: 'Marck Script', cursive;font-size:2.7rem;">Shoppy&trade;</a>
+                                <a href="#!name"><span class="name">Guest</span></a>
+                                </div>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'home' %}" class=" btn center waves-effect waves-light btn-flat grey">Home</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'products:index' %}" class="btn center waves-effect waves-light btn-flat grey">Products</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'accounts:index' %}" class="btn center waves-effect waves-light btn-flat grey">Accounts</a>
+                            </li>
+                            <li>
+                                <form action="{% url 'accounts:logout' %}" method="POST" style="padding:0 2rem 0 0;" class="center">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-flat grey"  style="padding-right: 8.5em;padding-left: 7em;margin-left: 1rem;margin-right: 1rem;">Logout</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:login' %}"><i class="material-icons waves-effect">cloud</i>Login</a></li>
+                            <li><a href="{% url 'accounts:signup' %}" class="waves-effect">Signup</a></li>
+                            <li><div class="divider"></div></li>
+                            <li><a class="subheader">Subheader</a></li>
+                            <li><a class="waves-effect" href="{% url 'products:index' %}">Products</a></li>
+                        {% endif %}
+                    </ul>
+                    <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+                </div>
+            </nav>
+        </div>
+    </header> 
